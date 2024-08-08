@@ -187,7 +187,7 @@ BUILD_ASSERT_DECL(ACL_OBS_STAGE_MAX < (1 << 2));
 /* Registers used for routing. */
 #define REG_NEXT_HOP_IPV4 "reg0"
 #define REG_NEXT_HOP_IPV6 "xxreg0"
-#define REG_SRC_IPV4 "reg1"
+#define REG_SRC_IPV4 "reg5"
 #define REG_SRC_IPV6 "xxreg1"
 #define REG_DHCP_RELAY_DIP_IPV4 "reg2"
 #define REG_ROUTE_TABLE_ID "reg7"
@@ -17138,7 +17138,7 @@ void build_lflows(struct ovsdb_idl_txn *ovnsb_txn,
     /* Parallel build may result in a suboptimal hash. Resize the
      * lflow map to a correct size before doing lookups */
     lflow_table_expand(lflows);
-    
+
     stopwatch_start(LFLOWS_TO_SB_STOPWATCH_NAME, time_msec());
     lflow_table_sync_to_sb(lflows, ovnsb_txn, input_data->ls_datapaths,
                            input_data->lr_datapaths,
