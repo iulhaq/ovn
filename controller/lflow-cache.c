@@ -387,12 +387,14 @@ lflow_cache_delete__(struct lflow_cache *lc, struct lflow_cache_entry *lce)
         COVERAGE_INC(lflow_cache_free_expr);
         expr_destroy(lce->value.expr);
         ovnacts_free((*lce->value.actions).data, (*lce->value.actions).size);
+        ofpbuf_delete(lce->value.actions);
         break;
     case LCACHE_T_MATCHES:
         COVERAGE_INC(lflow_cache_free_matches);
         expr_matches_destroy(lce->value.expr_matches);
         free(lce->value.expr_matches);
         ovnacts_free((*lce->value.actions).data, (*lce->value.actions).size);
+        ofpbuf_delete(lce->value.actions);
         break;
     }
 
